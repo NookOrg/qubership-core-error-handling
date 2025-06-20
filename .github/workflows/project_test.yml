@@ -1,4 +1,5 @@
-name: Test Project
+name: Auto-Assign Poject to Issue
+run-name: Issue ${{ github.event.issue.number }} → Project ${{ vars.PROJECT }}
 on:
   issues:
     types: [opened, edited, reopened]
@@ -6,8 +7,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Add project test
+      - name: Add issue to project
         uses: actions/add-to-project@v1.0.2
         with:
-          project-url: https://github.com/orgs/NookOrg/projects/1?type=beta
-          github-token: ${{ secrets.PAT_PROJECT }}
+          project-url: https://github.com/orgs/Netcracker/projects/${{ vars.PROJECT }}?type=beta
+          github-token: ${{ secrets.ADD_PROJECT_TO_ISSUE_PAT }}
